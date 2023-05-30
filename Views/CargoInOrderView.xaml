@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Delivery.Views.CargoInOrderView"
+             x:Name="UCCargoInOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Delivery.Views"
+             xmlns:utilities="clr-namespace:Delivery.Utilities"
+             
+             mc:Ignorable="d"
+             
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             xmlns:viewModels="clr-namespace:Delivery.ViewModels">
+    <UserControl.Resources>
+        <viewModels:CargoInOrderViewModel x:Key="CargoInOrderViewModel"/>
+        <utilities:IntegerOnlyConverter x:Key="IntegerOnlyConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Height="300" ItemsSource="{Binding CargoInOrders}" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True"/>
+                <DataGridTextColumn  Header="Cargo ID" Binding="{Binding CargoId, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Cargo">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Cargos, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding CargoId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="Name" />
+                                                    <Binding Path="Description" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderId, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Order">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Orders,  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding OrderId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}id: {0} date: {1} from: {2} to: {3} {4}">
+                                                    <Binding Path="Id" />
+                                                    <Binding Path="OrderDate" StringFormat="{}{0:dd/MM/yyyy}" />
+                                                    <Binding Path="DeparturePoint" />
+                                                    <Binding Path="DeliveryPoint" />
+                                                    <Binding Path="Customer" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Count" Binding="{Binding Count, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntegerOnlyConverter}}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Update" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <Label Content="Cargo ID:" />
+            <TextBox Text="{Binding FormInput_CargoId, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Order ID:" />
+            <TextBox Text="{Binding FormInput_OrderId, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Count:" />
+            <TextBox Text="{Binding FormInput_Count, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Create" Command="{Binding CreateCommand}" Cursor="Hand"  />
+        </StackPanel>
+    </Grid>
+</UserControl>

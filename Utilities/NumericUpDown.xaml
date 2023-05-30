@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Delivery.Utilities.NumericUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Delivery.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="180">
+
+    <UserControl.Resources>
+        <local:IntegerOnlyConverter x:Key="IntegerOnlyConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            
+        </Grid.RowDefinitions>
+        <Button Name="NUDButtonDown" Padding="0" Grid.Column="0"  FontSize="16" Foreground="White"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Center" Click="NUDButtonDown_Click" Content="-"/>
+        <TextBox Name="NUDTextBox" Grid.Column="1"   TextAlignment="Center" FontSize="16"  PreviewKeyDown="NUDTextBox_PreviewKeyDown" PreviewKeyUp="NUDTextBox_PreviewKeyUp" TextChanged="NUDTextBox_TextChanged" Cursor=""/>
+        <Button Name="NUDButtonUP" Padding="0" Grid.Column="2"  FontSize="16" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Click="NUDButtonUP_Click" Content="+"/>
+
+    </Grid>
+</UserControl>

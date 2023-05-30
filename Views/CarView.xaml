@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="Delivery.Views.CarView"
+             x:Name="UCCarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Delivery.Views"
+             xmlns:utilities="clr-namespace:Delivery.Utilities"
+             
+             mc:Ignorable="d"
+             
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             xmlns:viewModels="clr-namespace:Delivery.ViewModels">
+    <UserControl.Resources>
+        <viewModels:CarViewModel x:Key="CarViewModel"/>
+        <utilities:FloatConverter x:Key="FloatConverter" />
+        <utilities:RegNumberConverter x:Key="RegNumberConverter"/>
+
+
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Height="300" ItemsSource="{Binding Cars}"  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Registration Number" Binding="{Binding RegNumber, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Engine Hours" Binding="{Binding EngineHours, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTemplateColumn Header="Driver">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                        <ComboBox ItemsSource="{Binding DataContext.Drivers, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              SelectedValue="{Binding DriverId, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="Id">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="FirstName" />
+                                                <Binding Path="LastName" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Update" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <Label Content="Brand:" />
+            <TextBox Text="{Binding FormInput_Brand, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Model:" />
+            <TextBox Text="{Binding FormInput_Model, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Registration Number:" />
+            <TextBox Text="{Binding FormInput_RegNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource RegNumberConverter}}"  />
+
+            <Label Content="Engine Hours:" />
+            <TextBox Text="{Binding FormInput_EngineHours, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" />
+
+            <Label Content="Driver:" />
+            <ComboBox  ItemsSource="{Binding DataContext.Drivers, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              SelectedValue="{Binding FormInput_DriverId, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="FirstName" />
+                                    <Binding Path="LastName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                
+            </ComboBox>
+
+            <Button Content="Create" Command="{Binding CreateCommand}" Cursor="Hand"  />
+        </StackPanel>
+    </Grid>
+</UserControl>

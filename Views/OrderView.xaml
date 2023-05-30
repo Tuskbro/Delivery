@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="Delivery.Views.OrderView"
+             x:Name="UCOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Delivery.Views"
+             xmlns:utilities="clr-namespace:Delivery.Utilities"
+             
+             mc:Ignorable="d"
+             
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             xmlns:viewModels="clr-namespace:Delivery.ViewModels">
+    <UserControl.Resources>
+        <viewModels:OrderViewModel x:Key="OrderViewModel"/>
+        <utilities:DateOnlyConverter x:Key="DateOnlyConverter" />
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Height="300" ItemsSource="{Binding Orders}"  AutoGenerateColumns="False" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate, Converter={StaticResource DateOnlyConverter}}" />
+                <DataGridTextColumn Header="Departure Point" Binding="{Binding DeparturePoint, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Delivery Point" Binding="{Binding DeliveryPoint, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTemplateColumn Header="Customer">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="FirstName" />
+                                                    <Binding Path="LastName" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Car">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Cars, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding CarId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="Model" />
+                                                    <Binding Path="RegNumber" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Update" Command="{Binding DataContext.UpdateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Cargo">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding DataContext.CargosInOrder, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  SelectedItem="{Binding DataContext.SelectedCargoInOrder, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Cargo.Name}" />
+                                            <Button Content="Delete" Command="{Binding DataContext.DeleteCargoInOrderCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBox Width="150" Margin="0,0,10,0" Text="{Binding FormInput_DeparturePoint, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="150" Margin="0,0,10,0" Text="{Binding FormInput_DeliveryPoint, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox Width="150" Margin="0,0,10,0" ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CustomerId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" DisplayMemberPath="FullName" />
+            <ComboBox Width="150" Margin="0,0,10,0" ItemsSource="{Binding DataContext.Cars, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CarId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" DisplayMemberPath="FullModel" />
+            <Button Content="Create" Command="{Binding DataContext.CreateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
