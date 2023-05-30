@@ -88,13 +88,46 @@
         </DataGrid>
         <StackPanel Grid.Row="1">
             <Label Content="Cargo ID:" />
-            <TextBox Text="{Binding FormInput_CargoId, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox ItemsSource="{Binding DataContext.Cargos, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding FormInput_CargoId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Name" />
+                                    <Binding Path="Description" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <Label Content="Order ID:" />
-            <TextBox Text="{Binding FormInput_OrderId, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox ItemsSource="{Binding DataContext.Orders,  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      SelectedValue="{Binding FormInput_OrderId, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}id: {0} date: {1} from: {2} to: {3} {4}">
+                                    <Binding Path="Id" />
+                                    <Binding Path="OrderDate" StringFormat="{}{0:dd/MM/yyyy}" />
+                                    <Binding Path="DeparturePoint" />
+                                    <Binding Path="DeliveryPoint" />
+                                    <Binding Path="Customer" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <Label Content="Count:" />
-            <TextBox Text="{Binding FormInput_Count, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding FormInput_Count, UpdateSourceTrigger=PropertyChanged,  Converter={StaticResource IntegerOnlyConverter}}" />
 
             <Button Content="Create" Command="{Binding CreateCommand}" Cursor="Hand"  />
         </StackPanel>

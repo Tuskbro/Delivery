@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Delivery.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace Delivery
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
+        }
+
+        private void TabControl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Получаем текущую выбранную вкладку
+            var tabControl = (TabControl)sender;
+            var selectedTabItem = tabControl.SelectedItem as TabItemViewModel;
+
+            // Если есть выбранная вкладка, обновляем ее контекст данных
+            if (selectedTabItem != null)
+            {
+                var selectedContent = tabControl.SelectedContent as FrameworkElement;
+                selectedContent?.GetBindingExpression(DataContextProperty)?.UpdateSource();
+            }
         }
     }
 }

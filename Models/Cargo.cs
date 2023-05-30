@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Delivery.Models
 {
-        public class Cargo : INotifyPropertyChanged
+    public class Cargo : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -71,5 +68,5 @@ namespace Delivery.Models
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
     }
+}

@@ -1,21 +1,14 @@
 ﻿using Delivery.Models;
-using Delivery.Utilities;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Delivery.ViewModels
 {
-    public class CarViewModel : ViewModelBase
+    public class CarViewModel : TabItemViewModel
     {
         private Car _selectedCar;
         private string _brand;
@@ -28,9 +21,8 @@ namespace Delivery.ViewModels
         private readonly Car _car = new Car();
         private ObservableCollection<Car> _cars;
         private Car _newCar = new Car();
+        public string Header { get; } = "Car";
 
-        
-        
 
         public ObservableCollection<Car> Cars
         {
@@ -143,8 +135,6 @@ namespace Delivery.ViewModels
             
             LoadCars();
             RaisePropertyChanged(nameof(Cars));
-
-
         }
 
         public void DeleteCar(Car car)
@@ -152,16 +142,14 @@ namespace Delivery.ViewModels
                 _car.DeleteCar(car.Id);
                 LoadCars();
                 ClearFormInputs();
-            ;
+            
         }
 
         private void LoadDrivers()
         {
-
             Drivers = _car.GetAllDrivers();
             
             RaisePropertyChanged(nameof(Drivers));
-            
         }
 
         private void LoadCars()
@@ -181,6 +169,5 @@ namespace Delivery.ViewModels
             FormInput_DriverId = 0;
         }
 
-        
     }
 }

@@ -5,33 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Delivery"
         xmlns:view="clr-namespace:Delivery.Views"
+        xmlns:viewModel="clr-namespace:Delivery.ViewModels"
+        
         
         
         xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         mc:Ignorable="d"
         Title="Delivery" Height="650" Width="900">
+    <Window.Resources>
+        <viewModel:MainViewModel x:Key="MainViewModel"/>
+    </Window.Resources>
     <Grid>
-        <TabControl>
-            <TabItem Header="Customer">
-                <view:CustomerView/>
-            </TabItem>
-            <TabItem Header="Cargo">
-                <view:CargoView/>
-            </TabItem>
-            <TabItem Header="Driver">
-                <view:DriverView/>
-            </TabItem>
-            <TabItem Header="Car">
-                <view:CarView/>
-            </TabItem>
-            <TabItem Header="Cargo In Order">
-                <view:CargoInOrderView/>
-            </TabItem>
-            <TabItem Header="Order">
-                <view:OrderView/>
-            </TabItem>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" ItemsSource="{Binding TabItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedTabItem}"  LostFocus="TabControl_LostFocus">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type viewModel:CustomerViewModel}">
+                    <view:CustomerView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:CargoViewModel}">
+                    <view:CargoView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:DriverViewModel}">
+                    <view:DriverView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:CarViewModel}">
+                    <view:CarView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:CargoInOrderViewModel}">
+                    <view:CargoInOrderView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:OrderViewModel}">
+                    <view:OrderView />
+                </DataTemplate>
+                <!-- Define DataTemplates for other view models... -->
+            </TabControl.Resources>
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" BasedOn="{StaticResource MaterialDesignTabItem}">
+                    <Setter Property="Header" Value="{Binding Header}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
         </TabControl>
+        
         
         
     </Grid>

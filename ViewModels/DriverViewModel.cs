@@ -5,21 +5,18 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Delivery.ViewModels
 {
-    public class DriverViewModel : ViewModelBase
+    public class DriverViewModel : TabItemViewModel
     {
         private readonly Driver _driver = new Driver();
         private ObservableCollection<Driver> _drivers;
         private Driver _newDriver = new Driver();
 
         private Driver _selectedDriver;
-
+        public string Header { get; } = "Driver";
         public ObservableCollection<Driver> Drivers
         {
             get { return _drivers; }
@@ -29,9 +26,6 @@ namespace Delivery.ViewModels
                 RaisePropertyChanged(nameof(Drivers));
             }
         }
-
-        
-
 
         private string _firstName;
         private string _lastName;
@@ -105,7 +99,6 @@ namespace Delivery.ViewModels
             UpdateCommand = new RelayCommand<Driver>(UpdateDriver);
             DeleteCommand = new RelayCommand<Driver>(DeleteDriver);
             FormInput_DateOfBirthday = new DateTime(2000, 1, 1);
-            //FormInput_Experience = 10;
         }
 
         private void LoadDrivers()
@@ -142,7 +135,6 @@ namespace Delivery.ViewModels
                 FormInput_LastName = string.Empty;
                 FormInput_PhoneNumber = string.Empty;
                 FormInput_DateOfBirthday = new DateTime(2000, 1, 1);
-                //FormInput_Experience = 0;
                 LoadDrivers();
             }
 
@@ -152,7 +144,7 @@ namespace Delivery.ViewModels
         {
             _driver.UpdateDriver(driver);
             LoadDrivers();
-            RaisePropertyChanged(nameof(Driver)); // Добавлено вызов события PropertyChanged
+            RaisePropertyChanged(nameof(Driver)); 
 
         }
 

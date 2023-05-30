@@ -1,27 +1,16 @@
 ﻿using Delivery.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Controls.Primitives;
-using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using System.Windows.Media.Media3D;
-using System.Xml.Linq;
 
 namespace Delivery.ViewModels
 {
-    public class CargoViewModel : ViewModelBase
+    public class CargoViewModel : TabItemViewModel
     {
         private readonly Cargo _cargo = new Cargo();
         private  Cargo _newCargo = new Cargo();
+        public string Header { get; } = "Cargo";
 
         private ObservableCollection<Cargo> _cargos;
 
@@ -34,8 +23,6 @@ namespace Delivery.ViewModels
                 RaisePropertyChanged(nameof(Cargos));
             }
         }
-
-        
 
         private string _name;
         private float _weight;
@@ -127,8 +114,6 @@ namespace Delivery.ViewModels
         public CargoViewModel()
         {
             LoadCargos();
-            //CreateCommand = new RelayCommand<Cargo>(CreateCargo);
-            //CreateCommand = new RelayCommand(() => CreateCargo(_newCargo));
             CreateCommand = new RelayCommand(() => CreateCargo());
 
             UpdateCommand = new RelayCommand<Cargo>(UpdateCargo);
@@ -166,7 +151,6 @@ namespace Delivery.ViewModels
             FormInput_Depth = 0;
 
             LoadCargos();
-
 
         }
 

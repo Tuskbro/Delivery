@@ -1,2 +1,220 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Delivery.Models.Car" BaseTypeListCollapsed="true">
+    <Position X="1" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAICoQAAABAAAAAAAAAAgQAAkAAAAEgAAABBAAA=</HashCode>
+      <FileName>Models\Car.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Models.Cargo" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAECBgAgAAAAAAAAAFQAgCAEAABgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cargo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Models.CargoInOrder" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEDAAACAAFAAAAAAAAAECQAkABAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CargoInOrder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Models.Customer" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAEASAQAAAAAEBAAAQAAAgAAAAAAAIAAEAAAAAAg=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Models.Driver" BaseTypeListCollapsed="true">
+    <Position X="8" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADCEACgAAAQAIEAAAAQAAAgAAAAAAQAAAAAIAAQAg=</HashCode>
+      <FileName>Models\Driver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Models.Order" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQEDAAAiAAQQQAAAAAAAgACAgAAEABAAAEAAAAAAAAg=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.FloatConverter" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Converters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.LettersConverter" BaseTypeListCollapsed="true">
+    <Position X="1" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Converters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.DateOnlyConverter" BaseTypeListCollapsed="true">
+    <Position X="1" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Converters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.IntegerOnlyConverter" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Converters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.RegNumberConverter" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAhAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Converters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.NumericUpDown" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAIAAYBACggAAAAAEAAAAgAoAAAAA=</HashCode>
+      <FileName>Utilities\NumericUpDown.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.PhoneMaskConverter" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="22.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAIAAAgAAAAgAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\PhoneMaskConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Utilities.Validation">
+    <Position X="13.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Utilities\Validation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.CargoInOrderViewModel">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EQOAAEAAAAFAQQEAgAAEAEAAEAAAAAQBAAACAAggAAA=</HashCode>
+      <FileName>ViewModels\CargoInOrderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.CargoViewModel">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAJIEEAAgCAQAEEAAEEAJCEABAEAAABAAAAIkAACAA=</HashCode>
+      <FileName>ViewModels\CargoViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.CarViewModel">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAIAEQSAYAAADEDAgQEACIQgAQgAAAAAEIAAABgAAA=</HashCode>
+      <FileName>ViewModels\CarViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.CustomerViewModel">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAEAQAQAAAIFABAEFAAAAAAAAAEAAAAAABAAAAAE=</HashCode>
+      <FileName>ViewModels\CustomerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.DriverViewModel">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEpCEAAAAAAAjNCBAEEAAgAAAAAAAAIAAAABIAACAA=</HashCode>
+      <FileName>ViewModels\DriverViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.ViewModels.OrderViewModel">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AaEBAEAiQYEQBIGABEBEBARQAAQAAEAAAGAAAAAgAIE=</HashCode>
+      <FileName>ViewModels\OrderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.Views.CargoInOrderView" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CargoInOrderView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Views.CargoView" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CargoView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Views.CarView" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CarView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Views.CustomerView" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CustomerView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Views.DriverView" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DriverView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.Views.OrderView" BaseTypeListCollapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\OrderView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Delivery.AppDbContext">
+    <Position X="11.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAAiAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>AppDbContext .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Delivery.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

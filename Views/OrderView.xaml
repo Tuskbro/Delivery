@@ -59,7 +59,8 @@
                                     <DataTemplate>
                                         <TextBlock>
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                    <Binding Path="Brand" />
                                                     <Binding Path="Model" />
                                                     <Binding Path="RegNumber" />
                                                 </MultiBinding>
@@ -102,11 +103,50 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
-            <TextBox Width="150" Margin="0,0,10,0" Text="{Binding FormInput_DeparturePoint, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Width="150" Margin="0,0,10,0" Text="{Binding FormInput_DeliveryPoint, UpdateSourceTrigger=PropertyChanged}" />
-            <ComboBox Width="150" Margin="0,0,10,0" ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CustomerId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" DisplayMemberPath="FullName" />
-            <ComboBox Width="150" Margin="0,0,10,0" ItemsSource="{Binding DataContext.Cars, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CarId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" DisplayMemberPath="FullModel" />
+        <StackPanel Grid.Row="1" Orientation="Vertical" >
+            <Label  Content=" Order Date:" />
+            <DatePicker SelectedDate="{Binding FormInput_OrderDate, UpdateSourceTrigger=PropertyChanged}" 
+                                    DisplayDateStart="1950-01-01"
+                                    DisplayDateEnd="2099-12-31"
+                                    SelectedDateFormat="Short"
+                                     />
+            <Label Content="DeparturePoint:" />
+            <TextBox  Margin="0,0,10,0" Text="{Binding FormInput_DeparturePoint, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="DeliveryPoint:" />
+            <TextBox  Margin="0,0,10,0" Text="{Binding FormInput_DeliveryPoint, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Customer:" />
+            <ComboBox  Margin="0,0,10,0" ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CustomerId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="FirstName" />
+                                    <Binding Path="LastName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Label Content="Car:" />
+            <ComboBox  Margin="0,0,10,0" ItemsSource="{Binding DataContext.Cars, RelativeSource={RelativeSource AncestorType=UserControl}}" SelectedValue="{Binding FormInput_CarId, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Model" />
+                                    <Binding Path="RegNumber" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button Content="Create" Command="{Binding DataContext.CreateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
         </StackPanel>
     </Grid>

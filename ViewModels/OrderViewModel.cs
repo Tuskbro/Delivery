@@ -1,4 +1,5 @@
 ﻿using Delivery.Models;
+using Delivery.Utilities;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
@@ -7,19 +8,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Delivery.ViewModels
 {
-    public class OrderViewModel : ViewModelBase
+    public class OrderViewModel : TabItemViewModel
     {
         private Order _selectedOrder;
         private string _departurePoint;
         private string _deliveryPoint;
         private int _customerId;
         private int _carId;
+        private DateTime _orderDate;
         private Customer _customer;
         private List<Customer> _customers;
         private Car _car;
@@ -27,7 +27,7 @@ namespace Delivery.ViewModels
         private readonly Order _order = new Order();
         private ObservableCollection<Order> _orders;
         private Order _newOrder = new Order();
-
+        public string Header { get; } = "Order";
         public ObservableCollection<Order> Orders
         {
             get { return _orders; }
@@ -37,8 +37,6 @@ namespace Delivery.ViewModels
                 RaisePropertyChanged(nameof(Orders));
             }
         }
-
-        
 
         private ObservableCollection<CargoInOrder> cargosInOrder;
         public ObservableCollection<CargoInOrder> CargosInOrder
@@ -63,7 +61,6 @@ namespace Delivery.ViewModels
         }
         private readonly AppDbContext _dbContext = new AppDbContext();
         
-
         public ICommand DeleteCargoInOrderCommand { get; private set; }
         public ICommand AddCargoCommand { get; private set; }
 
@@ -86,6 +83,7 @@ namespace Delivery.ViewModels
             CreateCommand = new RelayCommand(() => CreateOrder());
             UpdateCommand = new RelayCommand<Order>(UpdateOrder);
             DeleteCommand = new RelayCommand<Order>(DeleteOrder);
+            FormInput_OrderDate = DateTime.Today;
         }
 
         public List<Customer> Customers
@@ -130,6 +128,17 @@ namespace Delivery.ViewModels
             }
         }
 
+        public DateTime FormInput_OrderDate
+        {
+            get => _orderDate;
+            set
+            {
+                _orderDate = value;
+                _newOrder.OrderDate = value;
+                RaisePropertyChanged(nameof(FormInput_OrderDate));
+            }
+        }
+
         public int FormInput_CustomerId
         {
             get => _customerId;
@@ -154,17 +163,20 @@ namespace Delivery.ViewModels
 
         public void CreateOrder()
         {
-            Order order = new Order
+            if (FormInput_CarId != 0 && FormInput_CustomerId != 0 && !Validation.IsNullOrEmpty(new List<string> { FormInput_DeliveryPoint, FormInput_DeliveryPoint }))
             {
-                DeparturePoint = FormInput_DeparturePoint,
-                DeliveryPoint = FormInput_DeliveryPoint,
-                CustomerId = FormInput_CustomerId,
-                CarId = FormInput_CarId
-            };
+                Order order = new Order
+                {
+                    DeparturePoint = FormInput_DeparturePoint,
+                    DeliveryPoint = FormInput_DeliveryPoint,
+                    CustomerId = FormInput_CustomerId,
+                    CarId = FormInput_CarId
+                };
 
-            _order.CreateOrder(order);
-            LoadOrders();
-            ClearFormInputs();
+                _order.CreateOrder(order);
+                LoadOrders();
+                ClearFormInputs();
+            }
         }
 
         public void UpdateOrder(Order order)
@@ -221,9 +233,8 @@ namespace Delivery.ViewModels
             FormInput_DeliveryPoint = string.Empty;
             FormInput_CustomerId = 0;
             FormInput_CarId = 0;
+            FormInput_OrderDate = DateTime.Today;
         }
     }
-
-
 }
 

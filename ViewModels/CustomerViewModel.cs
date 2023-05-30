@@ -2,23 +2,18 @@
 using Delivery.Utilities;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using MaterialDesignThemes.Wpf;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Delivery.ViewModels
 {
-    public class CustomerViewModel : ViewModelBase
+    public class CustomerViewModel : TabItemViewModel
     {
         private readonly Customer _customer = new Customer();
         private ObservableCollection<Customer> _customers;
         private Customer _newCustomer = new Customer();
-
+        public string Header { get; } = "Customer";
         public ObservableCollection<Customer> Customers
         {
             get { return _customers; }
@@ -28,8 +23,6 @@ namespace Delivery.ViewModels
                 RaisePropertyChanged(nameof(Customers));
             }
         }
-       
-
 
         private string _firstName;
         private string _lastName;
@@ -113,7 +106,7 @@ namespace Delivery.ViewModels
         {
             _customer.UpdateCustomer(customer);
             LoadCustomers();
-            RaisePropertyChanged(nameof(Customers)); // Добавлено вызов события PropertyChanged
+            RaisePropertyChanged(nameof(Customers)); 
         }
 
         private void DeleteCustomer(Customer customer)

@@ -1,28 +1,26 @@
 ﻿using Delivery.Models;
+using Delivery.Utilities;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using MaterialDesignThemes.Wpf;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Delivery.ViewModels
 {
-    public class CargoInOrderViewModel : ViewModelBase
+    public class CargoInOrderViewModel : TabItemViewModel
     {
         private CargoInOrder _selectedCargoInOrder;
         private int _cargoId;
         private int _orderId;
+        private int _count;
         private readonly CargoInOrder _cargoInOrder = new CargoInOrder();
         private List<Cargo> _cargos;
         private ObservableCollection<CargoInOrder> _cargoInOrders;
         private CargoInOrder _newCargoInOrder = new CargoInOrder();
         private List<Order> _orders;
+        public string Header { get; } = "Cargo In Order";
 
         public ObservableCollection<CargoInOrder> CargoInOrders
         {
@@ -94,17 +92,31 @@ namespace Delivery.ViewModels
             }
         }
 
+        public int FormInput_Count
+        {
+            get => _count;
+            set
+            {
+                _count = value;
+                RaisePropertyChanged(nameof(FormInput_Count));
+            }
+        }
+
         public void CreateCargoInOrder()
         {
-            CargoInOrder cargoInOrder = new CargoInOrder
-            {
-                CargoId = FormInput_CargoId,
-                OrderId = FormInput_OrderId
-            };
+            if (FormInput_CargoId!=0 && FormInput_OrderId!=0 && FormInput_Count!=0)
+                {
+                CargoInOrder cargoInOrder = new CargoInOrder
+                {
+                    CargoId = FormInput_CargoId,
+                    OrderId = FormInput_OrderId,
+                    Count = FormInput_Count
+                };
 
-            _cargoInOrder.CreateCargoInOrder(cargoInOrder);
-            LoadCargoInOrders();
-            ClearFormInputs();
+                _cargoInOrder.CreateCargoInOrder(cargoInOrder);
+                LoadCargoInOrders();
+                ClearFormInputs(); 
+            }
         }
 
         public void UpdateCargoInOrder(CargoInOrder cargoInOrder)
@@ -143,6 +155,7 @@ namespace Delivery.ViewModels
         {
             FormInput_CargoId = 0;
             FormInput_OrderId = 0;
+            FormInput_Count= 0;
         }
     }
 }

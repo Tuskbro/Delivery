@@ -1,12 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Delivery.Models
 {
@@ -58,7 +55,6 @@ namespace Delivery.Models
                 _dbContext.SaveChanges();
             }
         }
-
 
         public void DeleteOrder(int id)
         {
